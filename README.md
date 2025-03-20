@@ -19,3 +19,4 @@ No e2store type may be reused. A list of all defined E2store types can be found 
 | Name  |  Language | Known Supported Formats (may support more check documentation)  | Short Description  |
 |---|---|---|---| 
 | [trin-e2store](https://github.com/ethereum/trin/tree/master/crates/e2store)  | Rust | [Era](./formats/era.md), [Era1](./formats/era1.md), [E2SS](./formats/e2ss.md) |   | 
+| [@ethereumjs/era](https://github.com/ethereumjs/ethereumjs-monorepo/tree/master/packages/era) | Javascript | [Era](./formats/era.md), [Era1](./formats/era1.md) |   |
