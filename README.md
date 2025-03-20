@@ -21,3 +21,5 @@ No e2store type may be reused. A list of all defined E2store types can be found 
 | [trin-e2store](https://github.com/ethereum/trin/tree/master/crates/e2store)  | Rust | [Era](./formats/era.md), [Era1](./formats/era1.md), [E2SS](./formats/e2ss.md) |   | 
 | [@ethereumjs/era](https://github.com/ethereumjs/ethereumjs-monorepo/tree/master/packages/era) | Javascript | [Era](./formats/era.md), [Era1](./formats/era1.md) |   |
 | [go-ethereum](https://github.com/ethereum/go-ethereum/tree/master/internal/era) | Go | [Era1](./formats/era1.md) |   |
+| [nimbus-eth1](https://github.com/status-im/nimbus-eth1/blob/master/fluffy/eth_data/era1.nim) | Nim | [Era1](./formats/era1.md) |   |
+| [nimbus-eth2](https://github.com/status-im/nimbus-eth2/blob/stable/ncli/era.nim) | Nim | [Era](./formats/era.md) |   |
