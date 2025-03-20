@@ -19,7 +19,7 @@
 	CompressedReceipts = { type: 0x0500, data: snappyFramed(rlp(receipts)) }
 	TotalDifficulty    = { type: 0x0600, data: uint256(header.total_difficulty) }
 	Accumulator        = { type: 0x0700, data: accumulator-root }
-	BlockIndex         = { type: 0x3266, data: block-index }
+	BlockIndex         = { type: 0x6632, data: block-index }
 
  Accumulator is computed by constructing an SSZ list of header-records of length at most
  8192 and then calculating the hash_tree_root of that list.
