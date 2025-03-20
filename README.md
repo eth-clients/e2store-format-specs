@@ -23,3 +23,4 @@ No e2store type may be reused. A list of all defined E2store types can be found 
 | [go-ethereum](https://github.com/ethereum/go-ethereum/tree/master/internal/era) | Go | [Era1](./formats/era1.md) |   |
 | [nimbus-eth1](https://github.com/status-im/nimbus-eth1/blob/master/fluffy/eth_data/era1.nim) | Nim | [Era1](./formats/era1.md) |   |
 | [nimbus-eth2](https://github.com/status-im/nimbus-eth2/blob/stable/ncli/era.nim) | Nim | [Era](./formats/era.md) |   |
+| [nimbus-e2store.py](https://github.com/status-im/nimbus-eth2/blob/stable/ncli/e2store.py) | Python | [Era](./formats/era.md) |   |
