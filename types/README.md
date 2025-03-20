@@ -13,6 +13,6 @@ This is a sorted list by type number
 | [0x0700](0x0700.md)  | Accumulator | [Era1](../formats/era1.md)  |   |
 | [0x0800](0x0800.md)  | CompressedAccount | [E2SS](../formats/e2ss.md)  |   |
 | [0x0900](0x0900.md)  | CompressedStorage | [E2SS](../formats/e2ss.md)  |   |
-| [0x6532](0x6232.md)  | BlockIndex | [Era1](../formats/era1.md)  |   |
 | [0x6532](0x6532.md)  | Version | ALL  |   |
+| [0x6632](0x6632.md)  | BlockIndex | [Era1](../formats/era1.md)  |   |
 | [0x6932](0x6932.md)  | SlotIndex | [Era](../formats/era.md)  |   |
