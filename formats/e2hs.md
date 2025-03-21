@@ -8,7 +8,7 @@
 
  The structure can be summarized through this definition:
 
-	era1 := Version | block-tuple* | other-entries* | BlockIndex
+	e2hs := Version | block-tuple* | other-entries* | BlockIndex
 	block-tuple :=  CompressedHeaderWithProof | CompressedBody | CompressedReceipts
 
  Each basic element is its own entry:
@@ -17,7 +17,7 @@
 	CompressedHeaderWithProof   = { type: 0x0301, data: snappyFramed(ssz(header_with_proof)) }
 	CompressedBody              = { type: 0x0400, data: snappyFramed(rlp(body)) }
 	CompressedReceipts          = { type: 0x0500, data: snappyFramed(rlp(receipts)) }
-	BlockIndex                  = { type: 0x3266, data: block-index }
+	BlockIndex                  = { type: 0x6632, data: block-index }
 
  The `header_with_proof` type definition can be found in the Portal Network [documentation](https://github.com/ethereum/portal-network-specs/blob/master/history/history-network.md#block-header).
 
@@ -30,4 +30,12 @@
  defined relative to index's location in the file. The total number of block
  entries in the file is recorded in count.
 
- The maximum number of blocks in an E2HS file is 8192.
+ Every E2HS file must contain a contiguous section of 8192 blocks.
+
+ ### File Naming Convention
+ `<config-name>-<era-number>-<hash>.e2hs`
+
+ Where:
+ - `config-name`: Network configuration identifier (e.g., mainnet, sepolia) 
+ - `era-number`: Sequential epoch identifier
+ - `hash`: short hash of e2hs file
