@@ -33,9 +33,9 @@
  Every E2HS file must contain a contiguous section of 8192 blocks.
 
  ### File Naming Convention
- `<config-name>-<era-number>-<hash>.e2hs`
+ `<config-name>-<era-number>-<short-hash>.e2hs`
 
  Where:
  - `config-name`: Network configuration identifier (e.g., mainnet, sepolia) 
  - `era-number`: Sequential epoch identifier
- - `hash`: short hash of e2hs file
+ - `short-hash`: first 4 bytes of the first block header included in this file
