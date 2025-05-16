@@ -24,3 +24,4 @@ No e2store type may be reused. A list of all defined E2store types can be found 
 | [nimbus-eth1](https://github.com/status-im/nimbus-eth1/blob/master/fluffy/eth_data/era1.nim) | Nim | [Era1](./formats/era1.md) |   |
 | [nimbus-eth2](https://github.com/status-im/nimbus-eth2/blob/stable/ncli/era.nim) | Nim | [Era](./formats/era.md) |   |
 | [nimbus-e2store.py](https://github.com/status-im/nimbus-eth2/blob/stable/ncli/e2store.py) | Python | [Era](./formats/era.md) |   |
+| [Besu](https://github.com/hyperledger/besu/tree/main/util/src/main/java/org/hyperledger/besu/util/era1) | Java | [Era1](./formats/era1.md) |   |
