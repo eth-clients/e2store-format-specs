@@ -19,9 +19,9 @@ No e2store type may be reused. A list of all defined E2store types can be found 
 | Name  |  Language | Known Supported Formats (may support more check documentation)  | Short Description  |
 |---|---|---|---| 
 | [trin-e2store](https://github.com/ethereum/trin/tree/master/crates/e2store)  | Rust | [Era](./formats/era.md), [Era1](./formats/era1.md), [E2SS](./formats/e2ss.md), [E2HS](./formats/e2hs.md) |   | 
-| [@ethereumjs/era](https://github.com/ethereumjs/ethereumjs-monorepo/tree/master/packages/era) | Javascript | [Era](./formats/era.md), [Era1](./formats/era1.md) |   |
+| [@ethereumjs/e2store](https://github.com/ethereumjs/ethereumjs-monorepo/tree/master/packages/e2store) | Javascript | [Era](./formats/era.md), [Era1](./formats/era1.md), [E2HS](./formats/e2hs.md) |   |
 | [go-ethereum](https://github.com/ethereum/go-ethereum/tree/master/internal/era) | Go | [Era1](./formats/era1.md) |   |
-| [nimbus-eth1](https://github.com/status-im/nimbus-eth1/blob/master/fluffy/eth_data/era1.nim) | Nim | [Era1](./formats/era1.md) |   |
+| [nimbus-eth1](https://github.com/status-im/nimbus-eth1/blob/master/portal/eth_data/era1.nim) | Nim | [Era1](./formats/era1.md) |   |
 | [nimbus-eth2](https://github.com/status-im/nimbus-eth2/blob/stable/ncli/era.nim) | Nim | [Era](./formats/era.md) |   |
 | [nimbus-e2store.py](https://github.com/status-im/nimbus-eth2/blob/stable/ncli/e2store.py) | Python | [Era](./formats/era.md) |   |
 | [Besu](https://github.com/hyperledger/besu/tree/main/util/src/main/java/org/hyperledger/besu/util/era1) | Java | [Era1](./formats/era1.md) |   |
