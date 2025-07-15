@@ -5,6 +5,8 @@ This is a sorted list by type number
 |---|---|---|---|
 | [0x0000](0x0000.md)  | Empty | None  |   |
 | [0x0100](0x0100.md)  | CompressedSignedBeaconBlock | [Era](../formats/era.md)  |   |
+| [0x0101](0x0101.md)  | CompressedBlobSidecar | TODO: Erb |   |
+| [0x0102](0x0102.md)  | CompressedDataColumnSidecar | TODO: Erb |   |
 | [0x0200](0x0200.md)  | CompressedBeaconState | [Era](../formats/era.md)  |   |
 | [0x0300](0x0300.md)  | CompressedHeader | [Era1](../formats/era1.md), [E2SS](../formats/e2ss.md) |   |
 | [0x0301](0x0301.md)  | CompressedHeaderWithProof | [E2HS](../formats/e2hs.md) |   |
