@@ -14,14 +14,14 @@ The format can be summarized with the following expression:
 
 Each basic element is its own e2store entry:
 
-       Version            = { type: 0x3265, data: nil }
+       Version            = { type: 0x6532, data: nil }
        CompressedHeader   = { type: 0x03,   data: snappyFramed(rlp(header)) }
        CompressedBody     = { type: 0x04,   data: snappyFramed(rlp(body)) }
-       CompressedSlimReceipts = { type: 0x08,   data: snappyFramed(rlp([tx-type, post-state-or-status, cumulative-gas, logs])) }
+       CompressedSlimReceipts = { type: 0x0a,   data: snappyFramed(rlp([tx-type, post-state-or-status, cumulative-gas, logs])) }
        TotalDifficulty    = { type: 0x06,   data: uint256(header.total_difficulty) }
-       Proof              = { type: 0x09    data: snappyFramed(rlp([proof-type, ssz(BlockProofHistoricalHashesAccumulator) | ssz(BlockProofHistoricalRoots) | ssz(BlockProofHistoricalSummaries)]))}
+       Proof              = { type: 0x0b    data: snappyFramed(rlp([proof-type, ssz(BlockProofHistoricalHashesAccumulator) | ssz(BlockProofHistoricalRoots) | ssz(BlockProofHistoricalSummaries)]))}
        AccumulatorRoot    = { type: 0x07,   data: hash_tree_root(List(HeaderRecord, 8192)) }
-       Index              = { type: 0x3267, data: index }
+       Index              = { type: 0x6732, data: index }
 
 A few notes on individual elements:
 
