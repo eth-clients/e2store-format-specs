@@ -1,7 +1,7 @@
 # EraE files
 
  EraE files are themselves e2store files. For more information on this format,
- see https:github.com/status-im/nimbus-eth2/blob/stable/docs/e2store.md.
+ see https://github.com/status-im/nimbus-eth2/blob/stable/docs/e2store.md.
 
 The format is designed to be compatible for both pre-merge execution layer data
 and post-merge. It is intended to be a companion to the Era format.
