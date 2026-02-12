@@ -10,7 +10,7 @@ and post-merge. It is intended to be a companion to the Era format.
 
 The format can be summarized with the following expression:
 
-       eraE := Version | CompressedHeader+ | CompressedBody+ | CompressedReceipts+ | Proofs+ | TotalDifficulty* | other-entries* | Accumulator? | BlockIndex
+       eraE := Version | CompressedHeader+ | CompressedBody+ | CompressedSlimReceipts+ | Proofs+ | TotalDifficulty* | other-entries* | Accumulator? | BlockIndex
 
 Each basic element is its own e2store entry:
 
@@ -21,11 +21,11 @@ Each basic element is its own e2store entry:
        TotalDifficulty    = { type: 0x06,   data: uint256(header.total_difficulty) }
        Proof              = { type: 0x0b    data: snappyFramed(rlp([proof-type, ssz(BlockProofHistoricalHashesAccumulator) | ssz(BlockProofHistoricalRoots) | ssz(BlockProofHistoricalSummaries)]))}
        AccumulatorRoot    = { type: 0x07,   data: hash_tree_root(List(HeaderRecord, 8192)) }
-       Index              = { type: 0x6732, data: index }
+       Index              = { type: 0x6632, data: index }
 
 A few notes on individual elements:
 
-- `CompressedReceipts` is optional and a different format than the consensus EIP-2718 format to optimize internal use in clients.
+- `CompressedSlimReceipts` is optional and a different format than the consensus EIP-2718 format to optimize internal use in clients.
 - `Proof` is optional but if included, provides the coresponding proof for each `CompressedHeader` in the file corresponding to the Portal Network proofs specification[^1]. It's possible to have multiple proof types in the same file at fork boundaries.
 - `TotalDifficulty` is optional and little-endian encoded.
 - `AccumulatorRoot` is optional and only defined for epochs with pre-merge data.
