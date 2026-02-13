@@ -66,5 +66,5 @@ The `proof-type` value maps to an associated proof object. It's used to disambig
 | 3 | BlockProofHistoricalSummariesDeneb |
 
 [^1]: https://github.com/ethereum/portal-network-specs/blob/master/legacy/history/history-network.md#block-header
-[^2]: https://github.com/ethereum/portal-network-specs/blob/master/legacy/hisotry/history-network.md#the-historical-hashes-accumulator
+[^2]: https://github.com/ethereum/portal-network-specs/blob/master/legacy/history/history-network.md#the-historical-hashes-accumulator
 [^3]: https://github.com/ethereum/consensus-specs/blob/44ae6e661d9beac383f4a1f33be74259bae93c85/presets/mainnet/phase0.yaml#L42
