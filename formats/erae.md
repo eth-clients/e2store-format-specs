@@ -26,7 +26,7 @@ Each basic element is its own e2store entry:
 A few notes on individual elements:
 
 - `CompressedSlimReceipts` is optional and a different format than the consensus EIP-2718 format to optimize internal use in clients.
-- `Proof` is a *highly recommended* component that provides the coresponding proof for each `CompressedHeader` in the file corresponding to the Portal Network proofs specification[^1]. It's possible to have multiple proof types in the same file at fork boundaries.
+- `Proof` is a *highly recommended* component that provides the corresponding proof for each `CompressedHeader` in the file corresponding to the Portal Network proofs specification[^1]. It's possible to have multiple proof types in the same file at fork boundaries.
 - `TotalDifficulty` is optional and little-endian encoded.
 - `AccumulatorRoot` is optional and only defined for epochs with pre-merge data.
 - `HeaderRecord` is defined in the Portal Network specification[^2].
