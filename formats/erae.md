@@ -19,14 +19,14 @@ Each basic element is its own e2store entry:
        CompressedBody         = { type: [0x04, 0x00], data: snappyFramed(rlp(body)) }
        CompressedSlimReceipts = { type: [0x0a, 0x00], data: snappyFramed(rlp([tx-type, post-state-or-status, cumulative-gas, logs])) }
        TotalDifficulty		  = { type: [0x06, 0x00], data: uint256(header.total_difficulty) }
-       Proof              	  = { type: [0x0b, 0x00], data: snappyFramed(rlp([proof-type, ssz(BlockProofHistoricalHashesAccumulator) | ssz(BlockProofHistoricalRoots) | ssz(BlockProofHistoricalSummaries)]))}
+       Proof              	  = { type: [0x0b, 0x00], data: snappyFramed(rlp([proof-type, ssz(BlockProofHistoricalHashesAccumulator) | ssz(BlockProofHistoricalRoots) | ssz(BlockProofHistoricalSummariesCapella) | ssz(BlockProofHistoricalSummariesDeneb)]))}
        AccumulatorRoot        = { type: [0x07, 0x00], data: hash_tree_root(List(HeaderRecord, 8192)) }
        Index                  = { type: [0x66, 0x32], data: index }
 
 A few notes on individual elements:
 
 - `CompressedSlimReceipts` is optional and a different format than the consensus EIP-2718 format to optimize internal use in clients.
-- `Proof` is optional but if included, provides the coresponding proof for each `CompressedHeader` in the file corresponding to the Portal Network proofs specification[^1]. It's possible to have multiple proof types in the same file at fork boundaries.
+- `Proof` is a *highly recommended* component that provides the coresponding proof for each `CompressedHeader` in the file corresponding to the Portal Network proofs specification[^1]. It's possible to have multiple proof types in the same file at fork boundaries.
 - `TotalDifficulty` is optional and little-endian encoded.
 - `AccumulatorRoot` is optional and only defined for epochs with pre-merge data.
 - `HeaderRecord` is defined in the Portal Network specification[^2].
@@ -54,6 +54,17 @@ There are some small differences between pre-merge and post-merge `eraE` files:
 - `TotalDifficulty` should only be encoded for `eraE` files pre-merge. For the epoch where the merge occurs, fill all remaining post-merge blocks with the final total difficulty of the chain.
 - `AccumulatorRoot` should only be encoded for `eraE` files pre-merge. For the epoch where the merge occurs, compute the root for an incomplete epoch where only pre-merge blocks are recorded in the accumulator. 
 
-[^1]: https://github.com/ethereum/portal-network-specs/blob/master/history/history-network.md#block-header
-[^2]: https://github.com/ethereum/portal-network-specs/blob/master/history/history-network.md#the-historical-hashes-accumulator
+### Proof type
+
+The `proof-type` value maps to an associated proof object. It's used to disambiguate the raw SSZ data inside RLP objects.
+
+| Type | Proof object |
+|---|---|
+| 0 | BlockProofHistoricalHashesAccumulator |
+| 1 | BlockProofHistoricalRoots |
+| 2 | BlockProofHistoricalSummariesCapella |
+| 3 | BlockProofHistoricalSummariesDeneb |
+
+[^1]: https://github.com/ethereum/portal-network-specs/blob/master/legacy/history/history-network.md#block-header
+[^2]: https://github.com/ethereum/portal-network-specs/blob/master/legacy/hisotry/history-network.md#the-historical-hashes-accumulator
 [^3]: https://github.com/ethereum/consensus-specs/blob/44ae6e661d9beac383f4a1f33be74259bae93c85/presets/mainnet/phase0.yaml#L42
