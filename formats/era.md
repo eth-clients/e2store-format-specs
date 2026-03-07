@@ -10,12 +10,14 @@ Each era is identified by when it ends. Thus, the genesis era is era `0`, follow
 
 ## File name
 
-`.era` file names follow a simple convention: `<config-name>-<era-number>-<short-historical-root>.era`:
+`.era` file names follow a simple convention: `<config-name>-<era-number>-<short-era-root>.era`:
 
 * `config-name` is the `CONFIG_NAME` field of the runtime configation (`mainnet`, `prater`, `ropsten`, `sepolia`, etc)
 * `era-number` is the number of the _first_ era stored in the file - for example, the genesis era file has number 0 - as a 5-digit 0-filled decimal integer
-* `short-era-root` is the first 4 bytes of the last historical root in the _last_ state in the era file, lower-case hex-encoded (8 characters), except the genesis era which instead uses the `genesis_validators_root` field from the genesis state.
-  * The root is available as `state.historical_roots[era - 1]` except for genesis, which is `state.genesis_validators_root`
+* `short-era-root` is the first 4 bytes of the appropriate root, lower-case hex-encoded (8 characters):
+    * For genesis era: use `state.genesis_validators_root` field from the genesis state
+    * For pre-Capella forks: use the last historical root from the last state in the era file (`state.historical_roots[era - 1]`)
+    * For post-Capella forks: use the last historical summary from the last state in the era file (`state.historical_summaries[era - 1 - state.historical_roots.len()]`)
 
 Era files with multiple eras use the era number of the lowest era stored in the file, and the root of the highest era.
 
