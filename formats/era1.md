@@ -1,7 +1,7 @@
 # Era1 files
 
  Era1 files are themselves e2store files. For more information on this format,
- see https:github.com/status-im/nimbus-eth2/blob/stable/docs/e2store.md.
+ see https://github.com/status-im/nimbus-eth2/blob/stable/docs/e2store.md.
 
  The overall structure of an Era1 file follows closely the structure of an Era file
  which contains consensus Layer data (and as a byproduct, EL data after the merge).
