@@ -40,7 +40,7 @@ Where `indexes` represents the index of each block component:
 
        indexes := header-index | body-index | receipts-index | difficulty-index? | proof-index?
        
-The value `component-count` is the number of indexes stored by `indexes`. It should be in the range of 3-5, depending on whether `TotalDifficulty` and `Proofs` are present 
+The value `component-count` is the number of indexes stored by `indexes`. It should be in the range of 2-5, depending on whether `CompressedSlimReceipts`, `TotalDifficulty` and `Proofs` are present.
 
 All values in the block index are little-endian `uint64`.
 
