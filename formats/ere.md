@@ -1,6 +1,6 @@
-# EraE files
+# Ere files
 
- EraE files are themselves e2store files. For more information on this format,
+ Era execution (ere) files are themselves e2store files. For more information on this format,
  see https://github.com/status-im/nimbus-eth2/blob/stable/docs/e2store.md.
 
 The format is designed to be compatible for both pre-merge execution layer data
@@ -10,7 +10,7 @@ and post-merge. It is intended to be a companion to the Era format.
 
 The format can be summarized with the following expression:
 
-       eraE := Version | CompressedHeader+ | CompressedBody+ | CompressedSlimReceipts+ | Proofs+ | TotalDifficulty* | other-entries* | Accumulator? | BlockIndex
+       ere := Version | CompressedHeader+ | CompressedBody+ | CompressedSlimReceipts+ | Proofs+ | TotalDifficulty* | other-entries* | Accumulator? | BlockIndex
 
 Each basic element is its own e2store entry:
 
@@ -30,7 +30,7 @@ A few notes on individual elements:
 - `TotalDifficulty` is optional and little-endian encoded.
 - `AccumulatorRoot` is optional and only defined for epochs with pre-merge data.
 - `HeaderRecord` is defined in the Portal Network specification[^2].
-- `other-entries` is a placeholder for other potential objects to be added to EraE.
+- `other-entries` is a placeholder for other potential objects to be added to Ere.
 
 `BlockIndex` stores relative offsets to the components of each block entry. This allows `O(1)` access to all components of a block. The format is:
 
@@ -50,9 +50,9 @@ Due to the accumulator size limit of 8192, the maximum number of blocks in an Er
 
 ### Merge transition
 
-There are some small differences between pre-merge and post-merge `eraE` files:
-- `TotalDifficulty` should only be encoded for `eraE` files pre-merge. For the epoch where the merge occurs, fill all remaining post-merge blocks with the final total difficulty of the chain.
-- `AccumulatorRoot` should only be encoded for `eraE` files pre-merge. For the epoch where the merge occurs, compute the root for an incomplete epoch where only pre-merge blocks are recorded in the accumulator. 
+There are some small differences between pre-merge and post-merge `ere` files:
+- `TotalDifficulty` should only be encoded for `ere` files pre-merge. For the epoch where the merge occurs, fill all remaining post-merge blocks with the final total difficulty of the chain.
+- `AccumulatorRoot` should only be encoded for `ere` files pre-merge. For the epoch where the merge occurs, compute the root for an incomplete epoch where only pre-merge blocks are recorded in the accumulator. 
 
 ### Proof type
 
