@@ -10,7 +10,7 @@ and post-merge. It is intended to be a companion to the Era format.
 
 The format can be summarized with the following expression:
 
-       ere := Version | CompressedHeader+ | CompressedBody+ | CompressedSlimReceipts+ | Proofs+ | TotalDifficulty* | other-entries* | Accumulator? | BlockIndex
+       ere := Version | CompressedHeader+ | CompressedBody+ | CompressedSlimReceipts+ | Proofs+ | TotalDifficulty* | other-entries* | Accumulator? | DynamicBlockIndex
 
 Each basic element is its own e2store entry:
 
@@ -21,7 +21,7 @@ Each basic element is its own e2store entry:
        TotalDifficulty		  = { type: [0x06, 0x00], data: uint256(header.total_difficulty) }
        Proof              	  = { type: [0x0b, 0x00], data: snappyFramed(rlp([proof-type, ssz(BlockProofHistoricalHashesAccumulator) | ssz(BlockProofHistoricalRoots) | ssz(BlockProofHistoricalSummariesCapella) | ssz(BlockProofHistoricalSummariesDeneb)]))}
        AccumulatorRoot        = { type: [0x07, 0x00], data: hash_tree_root(List(HeaderRecord, 8192)) }
-       Index                  = { type: [0x66, 0x32], data: index }
+       Index                  = { type: [0x67, 0x32], data: index }
 
 A few notes on individual elements:
 
@@ -32,7 +32,7 @@ A few notes on individual elements:
 - `HeaderRecord` is defined in the Portal Network specification[^2].
 - `other-entries` is a placeholder for other potential objects to be added to Ere.
 
-`BlockIndex` stores relative offsets to the components of each block entry. This allows `O(1)` access to all components of a block. The format is:
+`DynamicBlockIndex` stores relative offsets to the components of each block entry. This allows `O(1)` access to all components of a block. The format is:
 
        block-index := starting-number | indexes | indexes | indexes ... | component-count | count
 
