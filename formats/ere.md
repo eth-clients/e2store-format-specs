@@ -6,6 +6,21 @@
 The format is designed to be compatible for both pre-merge execution layer data
 and post-merge. It is intended to be a companion to the Era format.
 
+## File name
+
+`.ere` file names follow the convention `<network-name>-<era-number>-<short-block-hash>(-<profile>)?.ere`:
+
+* `network-name` is the name of the execution network (`mainnet`, `sepolia`, etc).
+* `era-number` is the 8192-block batch number covered by the file, as a 5-digit 0-filled decimal integer. The file's `starting-number` is `era-number * 8192`.
+* `short-block-hash` is the first 4 bytes of the hash of the last block in the file, lower-case hex-encoded (8 characters).
+* `profile` is an optional postfix for non-default subset profiles, encoded as a lower-case ASCII string and separated from the base name with `-`.
+
+The filename without a `profile` postfix is reserved for the default, fully verifiable profile intended for long-term storage and distribution. Files that omit recommended components such as `Proof` entries, or otherwise use a subset profile, should include the profile postfix so consumers can distinguish their contents from the default profile.
+
+The defined profiles are `noproofs`, which omits `Proof` entries, and `noreceipts`, which omits `CompressedSlimReceipts` entries. Profiles can be combined in alphabetical order when separated by `-`.
+
+For example, a default mainnet Ere file is named `mainnet-00000-4bb7de2e.ere`, while when using profiles it could be named `mainnet-00000-4bb7de2e-noproofs.ere`, `mainnet-00000-4bb7de2e-noreceipts.ere`, or `mainnet-00000-4bb7de2e-noproofs-noreceipts.ere`.
+
 ## Specification
 
 The format can be summarized with the following expression:
