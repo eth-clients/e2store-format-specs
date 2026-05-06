@@ -25,7 +25,7 @@ For example, a default mainnet Ere file is named `mainnet-00000-4bb7de2e.ere`, w
 
 The format can be summarized with the following expression:
 
-       ere := Version | CompressedHeader+ | CompressedBody+ | CompressedSlimReceipts+ | Proofs+ | TotalDifficulty* | other-entries* | Accumulator? | DynamicBlockIndex
+       ere := Version | CompressedHeader+ | CompressedBody+ | CompressedSlimReceipts* | Proofs* | TotalDifficulty* | other-entries* | Accumulator? | DynamicBlockIndex
 
 Each basic element is its own e2store entry:
 
@@ -53,7 +53,7 @@ A few notes on individual elements:
 
 Where `indexes` represents the index of each block component:
 
-       indexes := header-index | body-index | receipts-index | difficulty-index? | proof-index?
+       indexes := header-index | body-index | receipts-index? | difficulty-index? | proof-index?
        
 The value `component-count` is the number of indexes stored by `indexes`. It should be in the range of 2-5, depending on whether `CompressedSlimReceipts`, `TotalDifficulty` and `Proofs` are present.
 
