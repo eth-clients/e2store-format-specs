@@ -16,6 +16,7 @@ This is a sorted list by type number
 | [0x0900](0x0900.md)  | CompressedStorage | [E2SS](../formats/e2ss.md)  |   |
 | [0x0a00](0x0a00.md)  | CompressedSlimReceipts | [EraE](../formats/erae.md)  |   |
 | [0x0b00](0x0b00.md)  | Proof | [EraE](../formats/erae.md)  |   |
+| [0x0c00](0x0c00.md)  | CompressedBlobsAndProofs | [Erb](../formats/erb.md)  |   |
 | [0x6532](0x6532.md)  | Version | ALL  |   |
 | [0x6632](0x6632.md)  | BlockIndex | [Era1](../formats/era1.md), [E2HS](../formats/e2hs.ms)  |   |
 | [0x6732](0x6732.md)  | DynamicBlockIndex | [Ere](../formats/ere.md)  |   |
