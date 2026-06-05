@@ -5,7 +5,7 @@ Links to download [e2store](https://github.com/status-im/nimbus-eth2/blob/613f4a
 
 
 Historical data providers offer **three primary storage formats**:
-- [**Ere**(Full Execution History)] - Archive nodes providing **execution layer history**.
+- [**Ere**(Full Execution History)](./formats/ere.md)  - Archive nodes providing **execution layer history**.
 - [**Era1**(Pre-Merge Execution History)](./formats/era1.md) (*deprecated*) - Archive nodes providing **execution layer history** before The Merge (ETH1).
 - [**Era**(Beacon Chain History)](./formats/era.md) - Stores data from the genesis of the Beacon Chain onwards. Can be used by Execution layer clients for history **from The Merge onward**, including historical block data.
 - [**E2SS**(Execution State)](./formats/e2ss.md) - **State snapshots** for execution clients.
