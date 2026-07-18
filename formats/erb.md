@@ -1,7 +1,8 @@
 # Erb files
 
-Erb files are e2store files which store blobs. For more information on this
-format, see https://github.com/status-im/nimbus-eth2/blob/stable/docs/e2store.md.
+Erb files are e2store files which store blobs and their KZG proofs. For more
+information on the underlying e2store format, see
+https://github.com/status-im/nimbus-eth2/blob/stable/docs/e2store.md.
 
 The overall structure of an Erb file follows closely the structure of an
 [Era](./era.md) file, grouped per `SLOTS_PER_HISTORICAL_ROOT` slots with a
@@ -58,8 +59,13 @@ contains every blob attached to the beacon block at that slot, in `index`
 order, alongside its matching KZG proof. Slots with no blobs
 are omitted; the corresponding `SlotIndex` entry is `0`.
 
-The fork - and thus the exact `Blob` schema - is derived from the slot
-of the entry, exactly as `CompressedSignedBeaconBlock` is decoded in `.era`.
+`kzg_proofs[i]` is the blob KZG proof of `blobs[i]`, as verified by
+`verify_blob_kzg_proof`, for all forks. Cell proofs are never stored;
+post-Fulu writers compute blob proofs with `compute_blob_kzg_proof`.
+
+Erb files exist only for eras starting at or after `DENEB_FORK_EPOCH`.
+Fork epochs are era-aligned on all public networks; the first mainnet erb
+file is `mainnet-01053-<short-era-root>.erb`.
 
 `other-entries` is an extension point for future record types. Unknown record
 types must be skipped.
@@ -69,8 +75,10 @@ types must be skipped.
 Against the paired `.era` file, for every slot `s` in
 `[starting_slot, starting_slot + 8192)`:
 
-* let `block = era[s]` (if any) and `bundle = erb[s]` (empty if the
+* let `block = era[s]` (if any) and `bundle = erb[s]` (absent if the
   `SlotIndex` offset is `0`)
+* `bundle` is present if and only if `block.body.blob_kzg_commitments`
+  is non-empty
 * `len(bundle.blobs) == len(block.body.blob_kzg_commitments)`
 * `len(bundle.kzg_proofs) == len(bundle.blobs)`
 * `verify_blob_kzg_proof_batch(bundle.blobs, block.body.blob_kzg_commitments, bundle.kzg_proofs)` succeeds
@@ -213,6 +221,12 @@ Each `CompressedBlobsAndProofs` entry carries the matching `kzg_proofs`
 that anchor each blob to its commitment in the corresponding
 beacon block. Combined with the matching `.era` file, this is sufficient to
 verify every blob without an extra per-file commitment.
+
+### Why blob KZG proofs rather than cell proofs?
+
+They are compact, fork-uniform, and verifiable in a single
+`verify_blob_kzg_proof_batch` call against the paired `.era` commitments.
+Consumers needing cells can recompute them from the blobs.
 
 ### Why share the `.era` file's short root in the name?
 
