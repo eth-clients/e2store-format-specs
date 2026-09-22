@@ -83,6 +83,12 @@ The `proof-type` value maps to an associated proof object. It's used to disambig
 
 From Gloas onwards the execution payload is no longer part of the beacon block, so the proof for a block is built from the beacon block that follows the one which committed to its payload. See the Portal Network proofs specification[^1] for details.
 
+### Genesis block of PoS only networks
+
+On networks that start out as PoS, and thus have no pre-merge history, block 0 cannot be proven with any of the proof types above. The post-merge proof types anchor the block hash in a beacon block, but the beacon chain holds the genesis execution block only as the `latest_execution_payload_header` of its genesis state. The historical hashes accumulator, which covers the pre-merge blocks of other networks, does not exist for these networks either.
+
+Block 0 does not need a proof as it is fully determined by the genesis data every client holds. As the proof profile applies to the whole file, a `Proof` entry for block 0 is still written, but its content cannot be verified and MUST be ignored. It MUST be verified against the genesis block of the network instead.
+
 [^1]: https://github.com/ethereum/portal-network-specs/blob/master/legacy/history/history-network.md#block-header
 [^2]: https://github.com/ethereum/portal-network-specs/blob/master/legacy/history/history-network.md#the-historical-hashes-accumulator
 [^3]: https://github.com/ethereum/consensus-specs/blob/44ae6e661d9beac383f4a1f33be74259bae93c85/presets/mainnet/phase0.yaml#L42
