@@ -34,7 +34,7 @@ Each basic element is its own e2store entry:
        CompressedBody         = { type: [0x04, 0x00], data: snappyFramed(rlp(body)) }
        CompressedSlimReceipts = { type: [0x0a, 0x00], data: snappyFramed(rlp([tx-type, post-state-or-status, cumulative-gas, logs])) }
        TotalDifficulty		  = { type: [0x06, 0x00], data: uint256(header.total_difficulty) }
-       Proof              	  = { type: [0x0b, 0x00], data: snappyFramed(rlp([proof-type, ssz(BlockProofHistoricalHashesAccumulator) | ssz(BlockProofHistoricalRoots) | ssz(BlockProofHistoricalSummariesCapella) | ssz(BlockProofHistoricalSummariesDeneb)]))}
+       Proof              	  = { type: [0x0b, 0x00], data: snappyFramed(rlp([proof-type, ssz(BlockProofHistoricalHashesAccumulator) | ssz(BlockProofHistoricalRoots) | ssz(BlockProofHistoricalSummariesCapella) | ssz(BlockProofHistoricalSummariesDeneb) | ssz(BlockProofHistoricalSummariesGloas)]))}
        AccumulatorRoot        = { type: [0x07, 0x00], data: hash_tree_root(List(HeaderRecord, 8192)) }
        Index                  = { type: [0x67, 0x32], data: index }
 
@@ -54,7 +54,7 @@ A few notes on individual elements:
 Where `indexes` represents the index of each block component:
 
        indexes := header-index | body-index | receipts-index? | difficulty-index? | proof-index?
-       
+
 The value `component-count` is the number of indexes stored by `indexes`. It should be in the range of 2-5, depending on whether `CompressedSlimReceipts`, `TotalDifficulty` and `Proofs` are present.
 
 All values in the block index are little-endian `uint64`.
@@ -67,7 +67,7 @@ Due to the accumulator size limit of 8192, the maximum number of blocks in an Er
 
 There are some small differences between pre-merge and post-merge `ere` files:
 - `TotalDifficulty` should only be encoded for `ere` files pre-merge. For the epoch where the merge occurs, fill all remaining post-merge blocks with the final total difficulty of the chain.
-- `AccumulatorRoot` should only be encoded for `ere` files pre-merge. For the epoch where the merge occurs, compute the root for an incomplete epoch where only pre-merge blocks are recorded in the accumulator. 
+- `AccumulatorRoot` should only be encoded for `ere` files pre-merge. For the epoch where the merge occurs, compute the root for an incomplete epoch where only pre-merge blocks are recorded in the accumulator.
 
 ### Proof type
 
@@ -79,6 +79,15 @@ The `proof-type` value maps to an associated proof object. It's used to disambig
 | 1 | BlockProofHistoricalRoots |
 | 2 | BlockProofHistoricalSummariesCapella |
 | 3 | BlockProofHistoricalSummariesDeneb |
+| 4 | BlockProofHistoricalSummariesGloas |
+
+From Gloas onwards the execution payload is no longer part of the beacon block, so the proof for a block is built from the beacon block that follows the one which committed to its payload. See the Portal Network proofs specification[^1] for details.
+
+### Genesis block of PoS only networks
+
+On networks that start out as PoS, and thus have no pre-merge history, block 0 cannot be proven with any of the proof types above. The post-merge proof types anchor the block hash in a beacon block, but the beacon chain holds the genesis execution block only as the `latest_execution_payload_header` of its genesis state. The historical hashes accumulator, which covers the pre-merge blocks of other networks, does not exist for these networks either.
+
+Block 0 does not need a proof as it is fully determined by the genesis data every client holds. As the proof profile applies to the whole file, a `Proof` entry for block 0 is still written, but its content cannot be verified and MUST be ignored. It MUST be verified against the genesis block of the network instead.
 
 [^1]: https://github.com/ethereum/portal-network-specs/blob/master/legacy/history/history-network.md#block-header
 [^2]: https://github.com/ethereum/portal-network-specs/blob/master/legacy/history/history-network.md#the-historical-hashes-accumulator
