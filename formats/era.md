@@ -12,7 +12,7 @@ Each era is identified by when it ends. Thus, the genesis era is era `0`, follow
 
 `.era` file names follow a simple convention: `<config-name>-<era-number>-<short-era-root>.era`:
 
-* `config-name` is the `CONFIG_NAME` field of the runtime configation (`mainnet`, `prater`, `ropsten`, `sepolia`, etc)
+* `config-name` is the `CONFIG_NAME` field of the runtime configuration (`mainnet`, `prater`, `ropsten`, `sepolia`, etc)
 * `era-number` is the number of the _first_ era stored in the file - for example, the genesis era file has number 0 - as a 5-digit 0-filled decimal integer
 * `short-era-root` is the first 4 bytes of the appropriate root, lower-case hex-encoded (8 characters):
     * For genesis era: use `state.genesis_validators_root` field from the genesis state
@@ -47,9 +47,9 @@ The `era-state` is the state in the era transition slot. The genesis group conta
 The structure of the era file gives it the following properties:
 
 * the indices at the end are fixed-length: they can be used to discover the beginning of an era if the end of it is known
-* the start slot field of the state slot index idenfifies which era the group pertains to
+* the start slot field of the state slot index identifies which era the group pertains to
 * the state in the era file is the end state after having applied all the blocks in the era and, if applicable, the block at the first slot - the `block_roots` entries in the state can be used to discover the digest of the blocks - either to verify the intergrity of the era file or to quickly load block roots without computing them.
-* each group in the era file is full, indendent era file - groups can freely be split and combined
+* each group in the era file is a full, independent era file - groups can freely be split and combined
 
 ## Reading era files
 
@@ -143,7 +143,7 @@ This is a tradeoff between being able to access state data such as validator key
 
 ## Why the weird file name?
 
-Historical roots for the entire beacon chain history are stored in the state - thus, with a recent state one can quickly judge if an era file is part of the same history - this is useful for example when performing checkpoint sync.
+Historical roots for the entire beacon chain history are stored in the state - thus, with a recent state one can quickly judge if an era file is part of the same history, which is useful for example when performing checkpoint sync.
 
 The genesis era file uses the genesis validators root for two reasons: it allows disambiguating otherwise similar chains and the genesis state does not yet have a historical root to use.
 
