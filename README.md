@@ -8,6 +8,7 @@ Historical data providers offer **three primary storage formats**:
 - [**Ere**(Full Execution History)](./formats/ere.md)  - Archive nodes providing **execution layer history**.
 - [**Era1**(Pre-Merge Execution History)](./formats/era1.md) (*deprecated*) - Archive nodes providing **execution layer history** before The Merge (ETH1).
 - [**Era**(Beacon Chain History)](./formats/era.md) - Stores data from the genesis of the Beacon Chain onwards. Can be used by Execution layer clients for history **from The Merge onward**, including historical block data.
+- [**Erc**(Blinded Beacon Chain History)](./formats/erc.md) - Like Era, but stores blinded blocks where the execution payload is replaced by its root. Smaller than Era; pair with an Ere file for the execution layer data.
 - [**E2SS**(Execution State)](./formats/e2ss.md) - **State snapshots** for execution clients.
 - [**E2HS**(Execution Layer History)](./formats/e2hs.md) - **full execution layer history** for execution clients, provides data from genesis to latest, headers are accompanied by proofs of canonicalness.
 - [**Erb**(Blob)](./formats/erb.md) - Era file equivalent for blob data; stores blobs and KZG proofs paired with an `.era` file by filename.
