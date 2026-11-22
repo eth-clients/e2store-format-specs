@@ -34,7 +34,7 @@ block := CompressedSignedBeaconBlock
 era-state := CompressedBeaconState
 ```
 
-The `block` entries of a group include all blocks leading up to the era transition in slot order. For example, the group representing era `1` contains blocks from slot `0` up to and including block `8191`. Empty slots are skipped.
+The `block` entries of a group include all blocks leading up to the era transition in slot order. For example, the group representing era `1` contains blocks from slot `0` up to and including slot `8191`. Empty slots are skipped.
 
 The `era-state` is the state in the era transition slot. The genesis group contains only the genesis state but no blocks. For example, the group representing era `1` contains the canonical state of slot `8192`.
 
@@ -48,7 +48,7 @@ The structure of the era file gives it the following properties:
 
 * the indices at the end are fixed-length: they can be used to discover the beginning of an era if the end of it is known
 * the start slot field of the state slot index identifies which era the group pertains to
-* the state in the era file is the end state after having applied all the blocks in the era and, if applicable, the block at the first slot - the `block_roots` entries in the state can be used to discover the digest of the blocks - either to verify the intergrity of the era file or to quickly load block roots without computing them.
+* the state in the era file is the end state after having applied all the blocks in the era and, if applicable, the block at the first slot - the `block_roots` entries in the state can be used to discover the digest of the blocks - either to verify the integrity of the era file or to quickly load block roots without computing them.
 * each group in the era file is a full, independent era file - groups can freely be split and combined
 
 ## Reading era files
