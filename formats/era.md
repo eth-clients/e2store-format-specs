@@ -17,7 +17,7 @@ Each era is identified by when it ends. Thus, the genesis era is era `0`, follow
 * `short-era-root` is the first 4 bytes of the appropriate root, lower-case hex-encoded (8 characters):
     * For genesis era: use `state.genesis_validators_root` field from the genesis state
     * For pre-Capella forks: use the last historical root from the last state in the era file (`state.historical_roots[era - 1]`)
-    * For post-Capella forks: use the last historical summary from the last state in the era file (`state.historical_summaries[era - 1 - state.historical_roots.len()]`)
+    * For post-Capella forks: use the root of the last historical summary from the last state in the era file (`hash_tree_root(state.historical_summaries[era - 1 - state.historical_roots.len()])`), which is the value `historical_roots` would have held for that era
 
 Era files with multiple eras use the era number of the lowest era stored in the file, and the root of the highest era.
 
